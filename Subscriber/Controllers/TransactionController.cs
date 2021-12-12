@@ -27,20 +27,10 @@ public class TransactionController : ControllerBase
     [HttpPost("processtransaction")]
     public async Task<ActionResult> ProcessTransaction(TransactionEvent transaction, [FromServices] DaprClient daprClient)
     {
-     
-        //var vehicleInfo = _vehicleRegistrationService.GetVehicleInfo(speedingViolation.VehicleId).Result;
-        //var vehicleInfo = await _daprClient.InvokeMethodAsync<VehicleInfo>(
-        //    HttpMethod.Get,
-        //   "vehicleregistrationservice",
-        //   $"vehicleInfo");
-
-
-        // log fine
-        string fineString = $"{transaction.Amount} Euro";
-        _logger.LogInformation($"Sent speeding ticket to {transaction.Name}. " +
-            $"Road: {transaction.TransactionId}, Licensenumber: {transaction.TransactionId}, " +
-            $"Vehicle: {transaction.TransactionNumber} {transaction.TransactionNumber}, " +
-            $"Violation: {transaction.Amount} Km/h, Fine: {fineString}, " +
+        _logger.LogInformation($"Process Transaction for {transaction.Name}. " +
+            $"TransactionId: {transaction.TransactionId} " +
+            $"TransactionNumber: {transaction.TransactionNumber} " +
+            $"Amount: {transaction.Amount}" +
             $"On: {transaction.Timestamp.ToString("dd-MM-yyyy")} " +
             $"at {transaction.Timestamp.ToString("hh:mm:ss")}.");
 

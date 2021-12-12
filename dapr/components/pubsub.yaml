@@ -22,4 +22,4 @@ spec:
 scopes:
   - publisher
   - subscriber
-  - subscriber.state
+  - subscriber-state

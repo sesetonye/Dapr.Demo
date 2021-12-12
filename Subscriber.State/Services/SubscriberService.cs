@@ -10,9 +10,9 @@ namespace Subscriber.State.Services
             _httpClient = httpClient;
         }
 
-        public async Task<WeatherForecast> GetWeatherForecast(int forecastId)
+        public async Task<IEnumerable<WeatherForecast>> GetWeatherForecast(int forecastId)
         {
-            return await _httpClient.GetFromJsonAsync<WeatherForecast>($"WeatherForecast/{forecastId}");
+            return await _httpClient.GetFromJsonAsync<IEnumerable<WeatherForecast>>($"WeatherForecast/{forecastId}");
         }
     }
 }

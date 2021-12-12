@@ -20,4 +20,4 @@ auth:
 scopes:
   - publisher
   - subscriber
-  - subscriber.state
+  - subscriber-state

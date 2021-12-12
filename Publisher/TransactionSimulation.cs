@@ -60,16 +60,17 @@ public class TransactionSimulation
                         // 3. push to name-subscription Topic
                         await client.PublishEventAsync(_pubsubName, "name-subscription", eventData);
 
-                        // 4. Service to service invocation
+                        // 4. Service to service invocation - dapr is able to go directly to subcriber service
                         var weatherInfo1 = await client.InvokeMethodAsync<IEnumerable<WeatherForecast>>(
                             HttpMethod.Get,
-                           "subscriber.state",
+                           "subscriber",
                            $"weatherforecast");
                         Console.WriteLine($"{weatherInfo1.First()}");
 
-                        var weatherInfo = await client.InvokeMethodAsync<WeatherForecast>(
+                        //5. this call keeps failing as the dapr does not recognise service name with a '.'
+                        var weatherInfo = await client.InvokeMethodAsync<IEnumerable<WeatherForecast>>(
                             HttpMethod.Get,
-                           "subscriber.state",
+                           "subscriber-state",
                            $"state/weather");
 
                     }
